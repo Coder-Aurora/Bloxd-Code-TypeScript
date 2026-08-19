@@ -1,6 +1,6 @@
 type Vector3 = [number, number, number];
 
-function circle(
+export function circle(
     centre: Vector3,
     radius: number,
     block: string = "White Wool"
