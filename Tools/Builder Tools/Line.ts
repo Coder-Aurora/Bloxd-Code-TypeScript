@@ -1,8 +1,6 @@
-// Why can't I use "Math" ????????????????????
 import { Async } from "./AsyncTimer";
 
 type Vector3 = [number, number, number];
-// Treat the symptoms but not the root cause...
 declare const Math: any;
 
 export function line(
