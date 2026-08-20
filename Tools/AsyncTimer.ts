@@ -74,7 +74,7 @@ export const Async = {
     }
 };
 
-const _processQueue = (): void => {
+export function _processQueue(): void {
     const now = api.now();
 
     Array.from(_DelayMap.entries()).forEach(([id, item]) => {
@@ -87,8 +87,9 @@ const _processQueue = (): void => {
             }
         }
     });
-};
+}
 
-tick = (ms) => {
+// In Index.js | Index.ts
+tick = () => {
     _processQueue();
 };
