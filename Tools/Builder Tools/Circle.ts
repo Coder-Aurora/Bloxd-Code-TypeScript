@@ -13,8 +13,7 @@ export function circle(
     while (x < -z) {
         const mid: number = z + 0.5;
 
-        if (x * x + mid * mid - radius * radius)
-            z += 1;
+        if (x * x + mid * mid - radius * radius) z += 1;
 
         api.setBlock(cx + x, cy, cz + z, block);
         api.setBlock(cx + x, cy, cz - z, block);
