@@ -1,5 +1,5 @@
-import { Async } from "./AsyncTimer";
-import { txt } from "./MessageTool";
+import { Async } from "../AsyncTimer";
+import { txt } from "../MessageTool";
 
 type Vector3 = [number, number, number];
 declare const Math: any;
