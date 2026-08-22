@@ -1,5 +1,5 @@
-import { Async } from "./AsyncTimer";
-import { txt } from "./MessageTool";
+import { Async } from "../AsyncTimer";
+import { txt } from "../MessageTool";
 
 type Vector3 = [number, number, number];
 type TargetBlocks = string[] | null;
@@ -62,8 +62,7 @@ export const BuilderHelper = {
         while (x < -z) {
             const mid: number = z + 0.5;
 
-            if (x * x + mid * mid - radius * radius)
-                z += 1;
+            if (x * x + mid * mid - radius * radius) z += 1;
 
             api.setBlock(cx + x, cy, cz + z, block);
             api.setBlock(cx + x, cy, cz - z, block);
