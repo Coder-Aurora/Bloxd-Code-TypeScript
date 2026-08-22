@@ -1,4 +1,4 @@
-import { Async } from "./AsyncTimer";
+import { Async } from "../AsyncTimer";
 
 type Vector3 = [number, number, number];
 declare const Math: any;
