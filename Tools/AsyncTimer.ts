@@ -77,16 +77,16 @@ export const Async = {
 export function _processQueue(): void {
     const now = api.now();
 
-    for (const [id, item] of _DelayMap) {
+    _DelayMap.forEach((item, id) => {
         if (now >= item.fireAt) {
-            if (!_DelayMap.delete(id)) continue;
+            if (!_DelayMap.delete(id)) return;
             try {
                 item.callback();
             } catch (err) {
                 console.log(`Caught error: ${err}`);
             }
         }
-    }
+    });
 }
 
 // In Index.js | Index.ts
