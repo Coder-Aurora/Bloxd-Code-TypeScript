@@ -25,7 +25,7 @@ export const Async = {
         return Id;
     },
 
-    cancelExecution: (callbackId: number): boolean => _DelayMap.delete(callbackId),
+    clearTimeout: (callbackId: number): boolean => _DelayMap.delete(callbackId),
 
     setIntervalLoop: (callback: () => void, intervalMs: number = 1000): number => {
         const LoopId = ++_LoopCounter;
@@ -61,12 +61,12 @@ export const Async = {
         return LoopId;
     },
 
-    clearIntervalLoop: (loopId: number): boolean => {
+    clearInterval: (loopId: number): boolean => {
         const LoopItem = _LoopMap.get(loopId);
         if (!LoopItem) return false;
 
         if (LoopItem.delayId) {
-            Async.cancelExecution(LoopItem.delayId);
+            Async.clearTimeout(LoopItem.delayId);
         }
         _LoopMap.delete(loopId);
 
@@ -77,19 +77,19 @@ export const Async = {
 export function _processQueue(): void {
     const now = api.now();
 
-    Array.from(_DelayMap.entries()).forEach(([id, item]) => {
+    for (const [id, item] of _DelayMap) {
         if (now >= item.fireAt) {
-            _DelayMap.delete(id);
+            if (!_DelayMap.delete(id)) continue;
             try {
                 item.callback();
             } catch (err) {
                 console.log(`Caught error: ${err}`);
             }
         }
-    });
+    }
 }
 
 // In Index.js | Index.ts
-tick = () => {
+tick = (ms) => {
     _processQueue();
 };
