@@ -35,7 +35,7 @@ export const BuilderHelper = {
         }
 
         let i: number = 0;
-        const loopId: number = Async.setIntervalLoop(() => {
+        const loopId: number = Async.setInterval(() => {
             const
                 curX: number = Math.round(x1 + (dx * i) / maxStep),
                 curY: number = Math.round(y1 + (dy * i) / maxStep),
@@ -44,7 +44,7 @@ export const BuilderHelper = {
 
             ++i;
             if (i > maxStep) {
-                Async.clearIntervalLoop(loopId);
+                Async.clearInterval(loopId);
             }
         }, delay);
     },
@@ -96,7 +96,7 @@ export const BuilderHelper = {
             index: number = 0,
             placed: number = 0;
 
-        const loopId: number = Async.setIntervalLoop(() => {
+        const loopId: number = Async.setInterval(() => {
             let batch: number = 0;
             while (batch < perTick && index < totalCells) {
                 const
@@ -124,7 +124,7 @@ export const BuilderHelper = {
             }
 
             if (index >= totalCells) {
-                Async.clearIntervalLoop(loopId);
+                Async.clearInterval(loopId);
                 txt.global(`Sphere generating complete, placed ${placed} blocks`);
             }
         }, delay);
@@ -154,7 +154,7 @@ export const BuilderHelper = {
             z: number = minZ,
             replaced: number = 0;
 
-        const loopId = Async.setIntervalLoop(() => {
+        const loopId = Async.setInterval(() => {
             if (!active) return;
 
             for (let dx: number = 0; dx < chunkSize; ++dx) {
@@ -185,14 +185,14 @@ export const BuilderHelper = {
 
             if (z > maxZ) {
                 active = false;
-                Async.clearIntervalLoop(loopId);
+                Async.clearInterval(loopId);
             }
         }, interval);
 
         return {
             stop: () => {
                 active = false;
-                return Async.clearIntervalLoop(loopId);
+                return Async.clearInterval(loopId);
             },
 
             getReplaced: () => replaced,
