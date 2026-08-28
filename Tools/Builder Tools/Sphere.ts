@@ -22,7 +22,7 @@ export function sphere(
         index: number = 0,
         placed: number = 0;
 
-    const loopId: number = Async.setIntervalLoop(() => {
+    const loopId: number = Async.setInterval(() => {
         let batch: number = 0;
         while (batch < perTick && index < totalCells) {
             const
@@ -50,7 +50,7 @@ export function sphere(
         }
 
         if (index >= totalCells) {
-            Async.clearIntervalLoop(loopId);
+            Async.clearInterval(loopId);
             txt.global(`Sphere generating complete, placed ${placed} blocks`);
         }
     }, delay);
