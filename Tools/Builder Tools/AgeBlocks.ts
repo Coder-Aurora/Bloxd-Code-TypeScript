@@ -10,7 +10,6 @@ interface AgeResult {
     getReplaced: () => number;
 };
 
-
 export function ageBlocks(
     pos1: Vector3,
     pos2: Vector3,
@@ -32,7 +31,7 @@ export function ageBlocks(
         z: number = minZ,
         replaced: number = 0;
 
-    const loopId = Async.setIntervalLoop(() => {
+    const loopId = Async.setInterval(() => {
         if (!active) return;
 
         for (let dx: number = 0; dx < chunkSize; ++dx) {
@@ -63,14 +62,14 @@ export function ageBlocks(
 
         if (z > maxZ) {
             active = false;
-            Async.clearIntervalLoop(loopId);
+            Async.clearInterval(loopId);
         }
     }, interval);
 
     return {
         stop: () => {
             active = false;
-            return Async.clearIntervalLoop(loopId);
+            return Async.clearInterval(loopId);
         },
 
         getReplaced: () => replaced,
