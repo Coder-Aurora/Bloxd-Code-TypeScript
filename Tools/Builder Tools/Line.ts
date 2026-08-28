@@ -25,7 +25,7 @@ export function line(
     }
 
     let i: number = 0;
-    const loopId: number = Async.setIntervalLoop(() => {
+    const loopId: number = Async.setInterval(() => {
         const
             curX: number = Math.round(x1 + (dx * i) / maxStep),
             curY: number = Math.round(y1 + (dy * i) / maxStep),
@@ -34,7 +34,7 @@ export function line(
 
         ++i;
         if (i > maxStep) {
-            Async.clearIntervalLoop(loopId);
+            Async.clearInterval(loopId);
         }
     }, delay);
 }
