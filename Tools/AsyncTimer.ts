@@ -27,7 +27,7 @@ export const Async = {
 
     clearTimeout: (callbackId: number): boolean => _DelayMap.delete(callbackId),
 
-    setIntervalLoop: (callback: () => void, intervalMs: number = 1000): number => {
+    setInterval: (callback: () => void, intervalMs: number = 1000): number => {
         const LoopId = ++_LoopCounter;
 
         const scheduleNext = () => {
@@ -55,9 +55,8 @@ export const Async = {
             interval: intervalMs,
             delayId: null
         });
-
         scheduleNext();
-
+        
         return LoopId;
     },
 
@@ -89,7 +88,7 @@ export function _processQueue(): void {
     });
 }
 
-// In Index.js | Index.ts
+// In index.js | index.ts
 tick = (ms) => {
     _processQueue();
 };
