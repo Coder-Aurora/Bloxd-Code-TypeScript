@@ -2,13 +2,15 @@
 import { refreshMessagePool, broadcastChatMessage } from "./Utility/AntiMute";
 // Lobby Protection
 import { startInventoryScan } from "./Utility/PreventDestruction";
+// Admin
+import { isAdmin } from "./Utility/Admin";
 // Command process
 import {
     initializeTempInfo,
     removeTempInfo,
     isCommand,
-    processCommand,
-    selectPos
+    selectPos,
+    processCommand
 } from "./Utility/Command/GraphicGenerator";
 
 /* import { detectEntities } from "./Utility/EntityDetector";
@@ -37,14 +39,13 @@ onPlayerChat = (playerId, chatMessage) => {
     } else {
         refreshMessagePool(playerId, chatMessage);
     }
-
     return false;
 };
 
 onPlayerClick = (playerId, wasAlt, x, y, z, block, targetEId) => {
     const heldItem = api.getHeldItem(playerId);
 
-    if (heldItem && heldItem?.name === "Moonstone Axe" && block !== "Air") {
+    if (isAdmin(playerId) && heldItem && heldItem?.name === "Moonstone Axe" && block !== "Air") {
         wasAlt
             ? selectPos(playerId, "pos2", [x, y, z])
             : selectPos(playerId, "pos1", [x, y, z]);
