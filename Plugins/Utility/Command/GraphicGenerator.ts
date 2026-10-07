@@ -1,6 +1,7 @@
 import type { PlayerId, Pos } from "@bloxd";
 
 import { txt } from "../MessageStyler";
+import { isAdmin } from "../Admin";
 import { REGEXP, USAGE } from "./RegExp";
 import { circle } from "../Graphics/Circle";
 import { distress } from "../Graphics/Distress";
@@ -67,6 +68,11 @@ export function selectPos(playerId: PlayerId, currPos: CurrentPos, pos: Pos | nu
  * @param message - The command message
  */
 export function processCommand(playerId: PlayerId, message: string): void {
+    if (!isAdmin(playerId)) {
+        txt.local_warn(playerId, "You have no access to use the command!");
+        return;
+    }
+
     const command = message.split(/\s+/)[0];
 
     switch (command) {

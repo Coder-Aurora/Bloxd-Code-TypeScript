@@ -2,6 +2,7 @@ import type { PlayerId } from "@bloxd";
 import { setInterval } from "@plugins/helpers";
 
 import { txt } from "./MessageStyler";
+import { isAdmin } from "./Admin";
 
 const _config = {
     scanInterval: 200,      // ms
@@ -12,15 +13,12 @@ const _config = {
         "Iceball", "Bouncy Bomb", "Moonstone Remote Explosive", "Ice Bridge",
         "Floor Creator", "Lucky Block", "Mining Grenade"
     ]),
-    allowedPlayers: ["Coder_Aurora"]
 };
 
-/**
- * Start inventory scan for a player
- */
+/** Start inventory scan for a player */
 export function startInventoryScan(playerId: PlayerId) {
     const playerName = api.getEntityName(playerId);
-    if (_config.allowedPlayers.includes(playerName)) return;
+    if (isAdmin(playerId)) return;
 
     setInterval(() => {
         for (let idx = 0; idx <= _config.maxInventorySize; ++idx) {
